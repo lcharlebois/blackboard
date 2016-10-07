@@ -12,15 +12,18 @@ public class ReaderThread extends Thread {
 	@Override
 	public void run() {
 		while(true) {
+			String msg;
 			try {
-				String msg = board.read(this);
-				if  (msg != null) {
+				msg = board.read(this);
+				while (msg != null) {
 					System.out.println(id + " reads: " + msg);
+					msg = board.read(this);
 				}
-				sleep(10);
+				sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
 		}
 	}
 
